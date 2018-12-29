@@ -1,26 +1,31 @@
 import React, { Component } from 'react';
+import {CardName, Suit} from 'typedeck';
+import {PokerGame} from './pineapple';
+import { Card } from "./Card";
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  printHand(hand){
+  }
   render() {
+    let results = new PokerGame().start();
+    console.log(CardName[3]);
+    console.log(results);
+    const winnerName = results.winner.name;
+    const winnerHand = results.winner.getHand();
+    console.log(winnerHand);
+    let pretty = winnerHand.getCards().map(card => {
+      return (
+        <Card name={CardName[card.cardName]} suit={Suit[card.suit]}></Card>
+      )
+    });
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <div>
+      The winner is {winnerName}
+      the winner hand i s<br></br>
+      {pretty}
+    </div> 
     );
   }
 }
